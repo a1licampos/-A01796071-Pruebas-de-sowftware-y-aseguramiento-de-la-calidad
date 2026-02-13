@@ -1,0 +1,59 @@
+
+    ------
+    Fecha: 2026-02-13 15:08:21
+    Tiempo de ejecución: 0.0006 segundos
+
+    
+    Total de ventas: 133
+    Total de ingresos: $2481.86
+
+    Datos inválidos:
+    Ninguno
+    ------
+    
+    ------
+    Fecha: 2026-02-13 15:08:28
+    Tiempo de ejecución: 0.0006 segundos
+
+    
+    Total de ventas: 8841
+    Total de ingresos: $169478.22
+
+    Datos inválidos:
+    Cantidad inválida para 'Fresh blueberries': -35
+Cantidad inválida para 'Green smoothie': -123
+
+    ------
+    
+    ------
+    Fecha: 2026-02-13 15:08:49
+    Tiempo de ejecución: 0.0006 segundos
+
+    
+    Total de ventas: 8841
+    Total de ingresos: $169478.22
+
+    Datos inválidos:
+
+Cantidad inválida para 'Fresh blueberries': -35
+Cantidad inválida para 'Green smoothie': -123
+
+    ------
+    
+    ------
+    Fecha: 2026-02-13 15:10:31
+    Tiempo de ejecución: 0.0005 segundos
+
+    
+    Total de ventas: 8775
+    Total de ingresos: $168145.36
+
+    Datos inválidos:
+
+Producto desconocido: 'Elotes'
+Cantidad inválida para 'Fresh blueberries': -35
+Producto desconocido: 'Frijoles'
+Cantidad inválida para 'Green smoothie': -123
+
+    ------
+    
