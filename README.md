@@ -5,11 +5,19 @@ Alumno: ALI MATEO CAMPOS MARTÍNEZ
 
 ## Folders
 
-La organización de los folders es la siguiente: Número de tarea (4.2) > Ejercicio (P1) > resultados (imágenes), source (código), test (archivos txt)
+La organización de los folders es la siguiente: Número de tarea (5.2) > Ejercicio (P1) > resultados (imágenes), source (código), test (archivos txt)
 
 ## Notas
 
 Profesor a continuación he dejado algunos comentarios justificando mis acciones dentro del código o dando claridad, con el objetivo de evitar la reducción de puntos en la tarea.
+
+### (Tarea 5.2) Ejercicio 1
+- El primer resultado me dió un resultado exacto con respecto al del profesor.
+
+- Los siguientes dos resultados fueron diferentes, al igual en en los ejercicios pasados, me temo que es debido a como el profesor manejó los errores, según entendí en las instrucciones, solo se deben gestionar los errores (para que no pare la ejecución del programa) y señalarlos (imprimirlos en consola y en el txt), me temo que tal vez el profesor convirtió los números a positivos por ejemplo.
+
+- Los resultados (imágenes de las pruebas de ejecución), siguen el mismo patrón de la tarea pasada.
+
 
 ### (Tarea 4.2) Ejercicio 1
 - Adicional a las pruebas otorgadas por el profesor, yo generé un archivo de texto con menos números para verificar que los cálculos fueran correctos.
