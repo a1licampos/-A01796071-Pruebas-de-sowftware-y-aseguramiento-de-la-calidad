@@ -1,0 +1,10 @@
+CSV Hotel:
+- Nombre
+- No Estrellas
+- Precio por noche
+
+
+CSV Cliente:
+- Nombre
+- Apellido
+- Tel

@@ -1,4 +1,10 @@
 """Text"""
+
+import os
+import csv
+import pandas as pd
+from typing import Optional
+
 class CRUDSystemHotelCustomer:
     """CRUD system focus to hotel and customers."""
 
@@ -10,9 +16,111 @@ class CRUDSystemHotelCustomer:
             self.customers = 1
             self.hotel = 0
 
+        self.folder_tests = os.path.join("tests")
+        os.makedirs(self.folder_tests, exist_ok=True)
 
-    def _create_csv_hotel_customers_info(self):
-        pass
+
+    def _print_line_break(self) -> None:
+        """Print linre break to show info."""
+        print("\n\n")
+
+
+    def _csv_to_pandas(self) -> pd.DataFrame:
+        """Return pandas from csv file."""
+        if self.hotel == 1:
+            return pd.read_csv(f"{self.folder_tests}/hotel.csv", encoding="utf-8")
+        else:
+            return pd.read_csv(f"{self.folder_tests}/customers.csv", encoding="utf-8")
+
+
+    def _pandas_to_csv(self, df:pd.DataFrame) -> None:
+        """Save pandas information into csv file."""
+        if self.hotel == 1:
+            try:
+                df.to_csv(f"{self.folder_tests}/hotel.csv", index=False, encoding="utf-8")
+
+                print("--> hotel.csv actualizado correctamente")
+            except (IOError, OSError) as e:
+                print(f"Eror in _pandas_to_csv [1]: {e}")
+
+        else:
+            try:
+                df.to_csv(f"{self.folder_tests}/customers.csv", index=False, encoding="utf-8")
+
+                print("**> customers.csv actualizado correctamente")
+            except (IOError, OSError) as e:
+                print(f"Eror in _pandas_to_csv [2]: {e}")
+
+
+    def _check_no_duplicates(self,
+                             h_name:Optional[str]=None,
+                             c_phone:Optional[int]=None) -> bool:
+        """Check there is not duplicates registers by hotel name and phone customer."""
+        df = self._csv_to_pandas()
+
+        if self.hotel == 1:
+            return h_name in df["Nombre"].values
+        else:
+            return c_phone in df["Telefono"].values
+
+
+    def set_information(self,
+                        h_name:Optional[str]=None,
+                        h_no_stars:Optional[int]=None,
+                        h_price_per_night:Optional[float]=None,
+                        c_name:Optional[str]=None,
+                        c_last_name:Optional[str]=None,
+                        c_phone:Optional[int]=None) -> None:
+        """Insert information in csv."""
+        print("[create_csv_hotel_customers_info]")
+
+        df = self._csv_to_pandas()
+
+        if self.hotel == 1:
+            if h_name is None or h_no_stars is None or h_price_per_night is None:
+                print("\tFaltan argumentos del hotel: name, no_stars y price_per_night.")
+                self._print_line_break()
+                return
+
+            if self._check_no_duplicates(h_name=h_name):
+                print(f"\tEl hotel {h_name} YA ESTÁ registrado")
+                self._print_line_break()
+                return
+
+            new_data = {
+                "Nombre": h_name,
+                "No_estrellas": h_no_stars,
+                "Precio_por_noche": h_price_per_night
+            }
+
+            df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
+
+            print(f"\tEl hotel {h_name} ha sido agregado...")
+
+        else:
+            if c_name is None or c_last_name is None or c_phone is None:
+                print("\tFaltan argumentos del cliente: name, last_name y phone.")
+                self._print_line_break()
+                return
+
+            if self._check_no_duplicates(c_phone=c_phone):
+                print(f"\tEl cliente {c_name} con el teléfono {c_phone} YA ESTÁ registrado")
+                self._print_line_break()
+                return
+
+            new_data = {
+                "Nombre": c_name,
+                "Apellido": c_last_name,
+                "Telefono": c_phone
+            }
+
+            df = pd.concat([df, pd.DataFrame([new_data])], ignore_index=True)
+
+            print(f"\tEl cliente {c_name} ha sido agregado...")
+
+        self._pandas_to_csv(df)
+        self._print_line_break()
+
 
 #    _____
 #   ( \/ @\____
