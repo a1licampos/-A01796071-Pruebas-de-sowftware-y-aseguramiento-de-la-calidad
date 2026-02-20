@@ -5,11 +5,16 @@ Alumno: ALI MATEO CAMPOS MARTÍNEZ
 
 ## Folders
 
-La organización de los folders es la siguiente: Número de tarea (5.2) > Ejercicio (P1) > resultados (imágenes), source (código), test (archivos txt)
+La organización de los folders es la siguiente: Número de tarea (6.2) > Ejercicio (P1) > resultados (imágenes), source (código), test (archivos txt)
 
 ## Notas
 
 Profesor a continuación he dejado algunos comentarios justificando mis acciones dentro del código o dando claridad, con el objetivo de evitar la reducción de puntos en la tarea.
+
+
+### (Tarea 6.2) Ejercicio 1
+- Text
+
 
 ### (Tarea 5.2) Ejercicio 1
 - El primer resultado me dió un resultado exacto con respecto al del profesor.
