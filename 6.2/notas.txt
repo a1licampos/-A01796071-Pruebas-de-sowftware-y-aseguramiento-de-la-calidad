@@ -8,3 +8,13 @@ CSV Cliente:
 - Nombre
 - Apellido
 - Tel
+
+CSV Reservations:
+- hotel_nombre
+- telefono_cliente
+- no_noches
+- precio_total
+- no_habitacion
+
+# Necesitaria revisar que los datos son adecuados (tamaño phone, test, name)
+# necesito siempre usar la information en minusculas

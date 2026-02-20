@@ -1,9 +1,8 @@
 """Text"""
 
 import os
-import csv
-import pandas as pd
 from typing import Optional
+import pandas as pd
 
 class CRUDSystemHotelCustomer:
     """CRUD system focus to hotel and customers."""
@@ -50,6 +49,8 @@ class CRUDSystemHotelCustomer:
                 print("**> customers.csv actualizado correctamente")
             except (IOError, OSError) as e:
                 print(f"Eror in _pandas_to_csv [2]: {e}")
+        
+        self._print_line_break()
 
 
     def _check_no_duplicates(self,
@@ -64,7 +65,37 @@ class CRUDSystemHotelCustomer:
             return c_phone in df["Telefono"].values
 
 
-    def set_information(self,
+    def get_register(self,
+                        h_name:Optional[str]=None,
+                        c_phone:Optional[int]=None) -> None:
+        """Delete hotel or customer from db."""
+        df = self._csv_to_pandas()
+
+        if self.hotel == 1:
+            try:
+                row = df.query(f'Nombre == "{h_name}"')
+            except (KeyError, TypeError) as e:
+                print(f"Error in get_register [1]: {e}")
+                return None
+
+            if row.empty:
+                print(f"\tEl hotel {h_name} no existe en el csv")
+            else:
+                return row
+        else:
+            try:
+                row = df.query(f'Telefono == {c_phone}')
+            except (KeyError, TypeError) as e:
+                print(f"Error in get_register [2]: {e}")
+                return None
+
+            if row.empty:
+                print(f"\tEl cliente tel:{c_phone} no existe en el csv")
+            else:
+                return row
+
+
+    def set_register(self,
                         h_name:Optional[str]=None,
                         h_no_stars:Optional[int]=None,
                         h_price_per_night:Optional[float]=None,
@@ -121,6 +152,27 @@ class CRUDSystemHotelCustomer:
         self._pandas_to_csv(df)
         self._print_line_break()
 
+
+    def delete_register(self,
+                        h_name:Optional[str]=None,
+                        c_phone:Optional[int]=None) -> None:
+        """Delete hotel or customer from db."""
+        df = self._csv_to_pandas()
+
+        if self.hotel == 1:
+            if self._check_no_duplicates(h_name=h_name):
+                df = df[df["Nombre"] != h_name]
+                print(f"\tEl hotel {h_name} ha sido eliminado con éxito")
+            else:
+                print(f"\tNo existe el hotel {h_name}")
+        else:
+            if self._check_no_duplicates(c_phone=c_phone):
+                df = df[df["Telefono"] != c_phone]
+                print(f"\tEl cliente tel:{c_phone} ha sido eliminado con éxito")
+            else:
+                print(f"\tNo existe el cliente tel:{c_phone}")
+
+        self._pandas_to_csv(df)
 
 #    _____
 #   ( \/ @\____
