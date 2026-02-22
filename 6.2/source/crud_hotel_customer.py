@@ -174,6 +174,19 @@ class CRUDSystemHotelCustomer:
 
         self._pandas_to_csv(df)
 
+import pandas as pd
+
+df = pd.read_csv("hotel.csv")
+
+nombre_modificar = "Hotel Plaza"
+
+df.loc[df["Nombre"] == nombre_modificar, "No Estrellas"] = 5
+df.loc[df["Nombre"] == nombre_modificar, "Precio por noche"] = 2000
+
+df.to_csv("hotel.csv", index=False)
+
+print("Hotel modificado correctamente")
+
 #    _____
 #   ( \/ @\____
 #   /           O
