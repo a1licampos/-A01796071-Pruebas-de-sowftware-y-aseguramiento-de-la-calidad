@@ -1,1 +1,3 @@
-Hotel_nombre,Cliente_telefono,No_habitacion,No_noches,Total_precio
+Hotel_nombre,Cliente_telefono,Estatus,No_habitacion,No_noches,Total_precio
+mafalda 2,1112223333,False,1,2,20.24
+mafalda 2,1112223333,False,1,2,20.24

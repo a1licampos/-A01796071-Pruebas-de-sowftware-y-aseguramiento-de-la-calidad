@@ -1,6 +1,8 @@
-"""Text"""
+"""Class to implement CRUD system:
+Focus to hotel and customers information"""
 
 import os
+import math
 from typing import Optional
 import pandas as pd
 
@@ -38,7 +40,7 @@ class CRUDSystemHotelCustomer:
             try:
                 df.to_csv(f"{self.folder_tests}/hotel.csv", index=False, encoding="utf-8")
 
-                print("--> hotel.csv actualizado correctamente")
+                print("\n--> hotel.csv actualizado correctamente")
             except (IOError, OSError) as e:
                 print(f"Eror in _pandas_to_csv [1]: {e}")
 
@@ -46,14 +48,14 @@ class CRUDSystemHotelCustomer:
             try:
                 df.to_csv(f"{self.folder_tests}/customers.csv", index=False, encoding="utf-8")
 
-                print("**> customers.csv actualizado correctamente")
+                print("\n**> customers.csv actualizado correctamente")
             except (IOError, OSError) as e:
                 print(f"Eror in _pandas_to_csv [2]: {e}")
         
         self._print_line_break()
 
 
-    def _check_no_duplicates(self,
+    def check_no_duplicates(self,
                              h_name:Optional[str]=None,
                              c_phone:Optional[int]=None) -> bool:
         """Check there is not duplicates registers by hotel name and phone customer."""
@@ -66,8 +68,8 @@ class CRUDSystemHotelCustomer:
 
 
     def get_register(self,
-                        h_name:Optional[str]=None,
-                        c_phone:Optional[int]=None) -> None:
+                     h_name:Optional[str]=None,
+                     c_phone:Optional[int]=None) -> None:
         """Delete hotel or customer from db."""
         df = self._csv_to_pandas()
 
@@ -96,12 +98,12 @@ class CRUDSystemHotelCustomer:
 
 
     def set_register(self,
-                        h_name:Optional[str]=None,
-                        h_no_stars:Optional[int]=None,
-                        h_price_per_night:Optional[float]=None,
-                        c_name:Optional[str]=None,
-                        c_last_name:Optional[str]=None,
-                        c_phone:Optional[int]=None) -> None:
+                     h_name:Optional[str]=None,
+                     h_no_stars:Optional[int]=None,
+                     h_price_per_night:Optional[float]=None,
+                     c_name:Optional[str]=None,
+                     c_last_name:Optional[str]=None,
+                     c_phone:Optional[int]=None) -> None:
         """Insert information in csv."""
         print("[create_csv_hotel_customers_info]")
 
@@ -113,7 +115,7 @@ class CRUDSystemHotelCustomer:
                 self._print_line_break()
                 return
 
-            if self._check_no_duplicates(h_name=h_name):
+            if self.check_no_duplicates(h_name=h_name):
                 print(f"\tEl hotel {h_name} YA ESTÁ registrado")
                 self._print_line_break()
                 return
@@ -134,7 +136,7 @@ class CRUDSystemHotelCustomer:
                 self._print_line_break()
                 return
 
-            if self._check_no_duplicates(c_phone=c_phone):
+            if self.check_no_duplicates(c_phone=c_phone):
                 print(f"\tEl cliente {c_name} con el teléfono {c_phone} YA ESTÁ registrado")
                 self._print_line_break()
                 return
@@ -160,13 +162,13 @@ class CRUDSystemHotelCustomer:
         df = self._csv_to_pandas()
 
         if self.hotel == 1:
-            if self._check_no_duplicates(h_name=h_name):
+            if self.check_no_duplicates(h_name=h_name):
                 df = df[df["Nombre"] != h_name]
                 print(f"\tEl hotel {h_name} ha sido eliminado con éxito")
             else:
                 print(f"\tNo existe el hotel {h_name}")
         else:
-            if self._check_no_duplicates(c_phone=c_phone):
+            if self.check_no_duplicates(c_phone=c_phone):
                 df = df[df["Telefono"] != c_phone]
                 print(f"\tEl cliente tel:{c_phone} ha sido eliminado con éxito")
             else:
@@ -174,18 +176,68 @@ class CRUDSystemHotelCustomer:
 
         self._pandas_to_csv(df)
 
-import pandas as pd
 
-df = pd.read_csv("hotel.csv")
+    def update_register(self,
+                        h_new_name:Optional[str]=None,
+                        h_name:Optional[str]=None,
+                        h_no_stars:Optional[int]=None,
+                        h_price_per_night:Optional[float]=None,
+                        c_new_phone: Optional[int]=None,
+                        c_name:Optional[str]=None,
+                        c_last_name:Optional[str]=None,
+                        c_phone:Optional[int]=None) -> None:
+        """Update register"""
+        df = self._csv_to_pandas()
 
-nombre_modificar = "Hotel Plaza"
+        if self.hotel == 1:
+            if self.check_no_duplicates(h_name=h_name):                
 
-df.loc[df["Nombre"] == nombre_modificar, "No Estrellas"] = 5
-df.loc[df["Nombre"] == nombre_modificar, "Precio por noche"] = 2000
+                if h_no_stars is not None and h_no_stars > 0:
+                    df.loc[df["Nombre"] == h_name, "No_estrellas"] = h_no_stars
+                    print(f"\t[Hotel] No estrellas: {h_no_stars} actualizado")
+                else:
+                    print("\tNo estrellas no es un dato válido o no fue proporcionado")
 
-df.to_csv("hotel.csv", index=False)
+                if h_price_per_night is not None and h_price_per_night > 0:
+                    df.loc[df["Nombre"] == h_name, "Precio_por_noche"] = h_price_per_night
+                    print(f"\t[Hotel] Precio por noche: {h_price_per_night} actualizado")
+                else:
+                    print("\tPrecio por noche no es un dato válido o no fue proporcionado")
 
-print("Hotel modificado correctamente")
+                if h_new_name is not None:
+                    df.loc[df["Nombre"] == h_name, "Nombre"] = h_new_name
+                    print(f"\t[Hotel] Nombre: {h_new_name} actualizado")
+                else:
+                    print("\tEl nombre del hotel no es un dato válido o no fue proporcionado")
+
+            else:
+                print(f"\tEl hotel {h_name} no existe en la DB")
+        else:
+            if self.check_no_duplicates(c_phone=c_phone):               
+
+                if c_name is not None:
+                    df.loc[df["Telefono"] == c_phone, "Nombre"] = c_name
+                    print(f"\t[Client] Nombre: {c_name} actualizado")
+                else:
+                    print("\tEl nombre no es un dato válido o no fue proporcionado")
+
+                if c_last_name is not None:
+                    df.loc[df["Telefono"] == c_phone, "Apellido"] = c_last_name
+                    print(f"\t[Client] Apellido: {c_last_name} actualizado")
+                else:
+                    print("\tEl apellido no es un dato válido o no fue proporcionado")
+
+                if c_new_phone is not None and int(math.log10(c_new_phone)) + 1 == 10:
+                    df.loc[df["Telefono"] == c_phone, "Telefono"] = c_new_phone
+                    print(f"\t[Client] Telefono: {c_new_phone} actualizado")
+                else:
+                    print("\tEl teléfono del cliente no es un dato válido o no fue proporcionado")
+
+            else:
+                print(f"\tEl usuario tel:{c_phone} no existe en la DB")
+
+        self._pandas_to_csv(df)
+
 
 #    _____
 #   ( \/ @\____
