@@ -2,8 +2,8 @@
 import os
 import csv
 import math
-from crud_hotel_customer import CRUDSystemHotelCustomer
-from crud_reservation import SystemReservation
+from .crud_hotel_customer import CRUDSystemHotelCustomer
+from .crud_reservation import SystemReservation
 
 CRUD_HOTEL = CRUDSystemHotelCustomer(1)
 CRUD_CUSTOMERS = CRUDSystemHotelCustomer(0)
@@ -141,12 +141,14 @@ def get_hotel():
     """Get hotel info from db."""
     name = upper_text(input("Nombre del hotel: "))
     print(CRUD_HOTEL.get_register(h_name=name))
+    return CRUD_HOTEL.get_register(h_name=name)
 
 
 def get_customer():
     """Get customer info from db."""
     phone = valid_phone()
     print(CRUD_CUSTOMERS.get_register(c_phone=phone))
+    return CRUD_CUSTOMERS.get_register(c_phone=phone)
 
 
 def update_hotel():

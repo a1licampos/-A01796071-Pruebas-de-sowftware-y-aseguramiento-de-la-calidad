@@ -19,6 +19,12 @@ Profesor a continuación he dejado algunos comentarios justificando mis acciones
 
 - flake8_3.png, muestra que la línea 65 es muy larga, sin embargo, aquí no encontré otra forma de acortar la línea, sin sacrificar claridad en el código, considero que en estos casos está bien preferir un error en flake8 que intentar una asginación de variables o un cambio de nombre que no puede ser claro.
 
+- Los casos de prueba negativos están en una subcarpeta en "results".
+
+- Nunca utilizar 'coverage' en ninguna de las tareas pasadas y al escribir bastantes funciones, me tuve que apoyar bastante de la IA, en especial de GPT-5.1-Codex-Max, no estoy muy orgulloso ya que no soy partidario del vibe-coding o el abuso de la misma en la programación, pero fue necesario para poder abarcar todas las funciones que tenía.
+
+- Para pylint del archivo de pruebas (test_crud_systems.py) no encontré la forma de corregir las advertencias sin desbaratar el código.
+
 - 
 
 
