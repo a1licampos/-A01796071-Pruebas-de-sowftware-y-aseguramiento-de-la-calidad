@@ -15,7 +15,11 @@ Profesor a continuación he dejado algunos comentarios justificando mis acciones
 ### (Tarea 6.2) Ejercicio 1
 - El carpeta de resultados están las capturas de pantalla que muestea el correcto funcionamiento de la aplicación.
 
-- pylint_2.png muestra errores de muchos argumentos, es un error de diseño, mi idea era manejar ambos CRUD (hotel y clientes) en una misma función para reutilizar funciones, aquí me doy cuenta que en pylint lo detecte como código "oloroso", probablemente sea cierto.
+- pylint_2.png muestra errores de muchos argumentos, es un error de diseño, mi idea era manejar ambos CRUD (hotel y clientes) en una misma función para reutilizar funciones, aquí me doy cuenta que en pylint lo detecta como código "oloroso", probablemente sea cierto y debido al tiempo de entrega no me es posible realizar una refactorización del código.
+
+- flake8_3.png, muestra que la línea 65 es muy larga, sin embargo, aquí no encontré otra forma de acortar la línea, sin sacrificar claridad en el código, considero que en estos casos está bien preferir un error en flake8 que intentar una asginación de variables o un cambio de nombre que no puede ser claro.
+
+- 
 
 
 ### (Tarea 5.2) Ejercicio 1
