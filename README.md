@@ -13,7 +13,9 @@ Profesor a continuación he dejado algunos comentarios justificando mis acciones
 
 
 ### (Tarea 6.2) Ejercicio 1
-- Text
+- El carpeta de resultados están las capturas de pantalla que muestea el correcto funcionamiento de la aplicación.
+
+- pylint_2.png muestra errores de muchos argumentos, es un error de diseño, mi idea era manejar ambos CRUD (hotel y clientes) en una misma función para reutilizar funciones, aquí me doy cuenta que en pylint lo detecte como código "oloroso", probablemente sea cierto.
 
 
 ### (Tarea 5.2) Ejercicio 1

@@ -9,19 +9,23 @@ CRUD_HOTEL = CRUDSystemHotelCustomer(1)
 CRUD_CUSTOMERS = CRUDSystemHotelCustomer(0)
 CD_RESERVATIONS = SystemReservation()
 
+
 def print_line_break() -> None:
     """Print linre break to show info."""
-    print("\n\n")
+    print("\n\n /")
 
 
-def create_csv_hotel_customers_info(folder_tests:str) -> None:
+def create_csv_hotel_customers_info(folder_tests: str) -> None:
     """Create a file hotel and customers csv."""
     print("[create_csv_hotel_customers_info]")
 
     path_hotel = os.path.join(folder_tests, "hotel.csv")
 
     if not os.path.exists(path_hotel):
-        with open(path_hotel, mode="w", newline="", encoding="utf-8") as file_hotel:
+        with open(path_hotel,
+                  mode="w",
+                  newline="",
+                  encoding="utf-8") as file_hotel:
             writer = csv.writer(file_hotel)
             writer.writerow(["Nombre", "No_estrellas", "Precio_por_noche"])
         print("\tArchivo hotel.csv creado correctamente")
@@ -31,7 +35,10 @@ def create_csv_hotel_customers_info(folder_tests:str) -> None:
     path_customers = os.path.join(folder_tests, "customers.csv")
 
     if not os.path.exists(path_customers):
-        with open(path_customers, mode="w", newline="", encoding="utf-8") as file_customers:
+        with open(path_customers,
+                  mode="w",
+                  newline="",
+                  encoding="utf-8") as file_customers:
             writer = csv.writer(file_customers)
             writer.writerow(["Nombre", "Apellido", "Telefono"])
         print("\tArchivo clientes.csv creado correctamente")
@@ -41,7 +48,10 @@ def create_csv_hotel_customers_info(folder_tests:str) -> None:
     path_customers = os.path.join(folder_tests, "reservations.csv")
 
     if not os.path.exists(path_customers):
-        with open(path_customers, mode="w", newline="", encoding="utf-8") as file_customers:
+        with open(path_customers,
+                  mode="w",
+                  newline="",
+                  encoding="utf-8") as file_customers:
             writer = csv.writer(file_customers)
             writer.writerow(["Hotel_nombre",
                              "Cliente_telefono",
@@ -82,9 +92,9 @@ def valid_hotel_stars() -> int:
     while True:
         try:
             stars = int(input("Estrellas del hotel: "))
-            if stars > 0 and stars < 6:
+            if 0 < stars < 6:
                 return stars
-            print("ERROR: El número de estrellas debe ser mayor a 0 y menor a 6.")
+            print("ERROR: No estrellas debe ser mayor a 0 y menor a 6.")
         except ValueError:
             print("ERROR: Ingresa un número válido.")
 
@@ -92,6 +102,7 @@ def valid_hotel_stars() -> int:
 def upper_text(texto: str) -> str:
     """Upper text."""
     return texto.strip().upper()
+
 
 # --- Principals functions ---
 def set_hotel():
@@ -249,14 +260,11 @@ def show_reservations():
     """Show all the reservations into db."""
     print(CD_RESERVATIONS.show_reservations())
 
+
 def main():
     """Main function to use CRUD program and create reservations"""
     print("--- --- ---")
     create_csv_hotel_customers_info(os.path.join("tests"))
-
-    crud_hotel = CRUDSystemHotelCustomer(1)
-    crud_customers = CRUDSystemHotelCustomer(0)
-    cd_reservations = SystemReservation()
 
 
 def menu():
@@ -271,7 +279,7 @@ def menu():
         "7": ("GET cliente", get_customer),
         "8": ("UPDATE cliente", update_customer),
         "9": ("Crear reservación", create_reservation),
-        "10":("Cancelar reservación", cancel_reservation),
+        "10": ("Cancelar reservación", cancel_reservation),
         "V": ("Ver reservaciones", show_reservations()),
         "E": ("Salir", None)
     }
