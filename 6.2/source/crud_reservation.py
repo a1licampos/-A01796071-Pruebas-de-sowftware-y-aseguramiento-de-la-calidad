@@ -101,6 +101,12 @@ class SystemReservation:
         return True
 
 
+    def show_reservations(self):
+        """Show reservations"""
+        df_reservations, _, _ = self._csv_to_pandas()
+
+        return df_reservations
+
 #    _____
 #   ( \/ @\____
 #   /           O

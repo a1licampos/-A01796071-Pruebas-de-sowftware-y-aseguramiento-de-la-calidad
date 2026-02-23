@@ -1,0 +1,85 @@
+Estuve probando cada una de las funciones personalizadamente,
+aquí está la función y las pruebas que realicé:
+
+def main():
+    """Main function to use CRUD program and create reservations"""
+    print("--- --- ---")
+    create_csv_hotel_customers_info(os.path.join("tests"))
+
+    crud_hotel = CRUDSystemHotelCustomer(1)
+    crud_customers = CRUDSystemHotelCustomer(0)
+
+
+    cd_reservations = SystemReservation()
+
+    # Create reservation
+    if crud_hotel.check_no_duplicates(h_name="mafalda 21"):
+
+        if crud_customers.check_no_duplicates(c_phone=1112223333):
+
+            cd_reservations.create_reservation(no_room=1,
+                                            no_nights=2,
+                                            h_name="mafalda 2",
+                                            c_phone=1112223333)
+        else:
+            print("[Creando reservación] No existe el cliente")
+    else:
+        print("[Creando reservación] No existe el hotel")
+
+    # Cancel reservation
+    if crud_hotel.check_no_duplicates(h_name="mafalda 2"):
+
+        if crud_customers.check_no_duplicates(c_phone=1112223333):
+
+            cd_reservations.cancel_reservation(h_name="mafalda 2",
+                                               c_phone=1112223333)
+        else:
+            print("[Cancelando reservación] No existe el cliente")
+    else:
+        print("[Cancelando reservación] No existe el hotel")
+
+
+    # Set
+    crud_hotel.set_register(h_name="kimba",
+                            h_no_stars=5,
+                            h_price_per_night=99.99)
+
+    crud_customers.set_register(c_name="Ali",
+                                c_last_name="Campos",
+                                c_phone=4423427014)
+
+    # Delete
+    crud_hotel.delete_register(h_name="kimba")
+    crud_customers.delete_register(c_phone=4423427014)
+
+    # Set
+    crud_hotel.set_register(h_name="mafalda",
+                            h_no_stars=3,
+                            h_price_per_night=49.99)
+
+    crud_customers.set_register(c_name="Mady",
+                                c_last_name="Campos",
+                                c_phone=4424264142)
+
+    # Get
+    info_hotel = crud_hotel.get_register(h_name="mafalda")
+    info_customer = crud_customers.get_register(c_phone=4424264142)
+
+    print(info_hotel)
+    print_line_break()
+    print(info_customer)
+    print_line_break()
+
+    # Update
+    crud_hotel.update_register(h_name="mafalda",
+                               h_no_stars=2,
+                               h_price_per_night=10.12,
+                               h_new_name="mafalda 2")
+    print(crud_hotel.get_register(h_name="mafalda"))
+
+    crud_customers.update_register(c_phone=4424264142,
+                                   c_name="Dany",
+                                   c_last_name="Martinez",
+                                   c_new_phone=1112223333)
+    print(crud_customers.get_register(c_phone=1112223333))
+
